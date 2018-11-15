@@ -1,3 +1,5 @@
+{% load bootstrap4 %}
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -39,7 +41,7 @@ div{
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1><a href="{% url 'TopTweetsFinder:TwitterFinderIndex' %}>Toptweets</a></h1>
+            <h1><a href="/">Toptweets</a></h1>
             <p>ツイッターのIDを入れると、直近のいいね数とリツイート数、最もリツイートされたツイートが一覧できます。</p>
             <form class="form-inline" method="GET" action="{% url 'TopTweetsFinder:TwitterFinderIndex' %}">
                 <div class="form-group">
@@ -70,6 +72,8 @@ div{
                     <img src="{{profile.image}}" width="100px">
                     <a href="https://twitter.com/{{profile.user_id}}">@{{profile.user_id}}</a>
                 </div>
+                <div>{{ profile.user_name }}</div>
+                <div>フォロワー数:{{ profile.followers_count }}</div>
                 <div>{{profile.description}}</div>
             </div>
             {% endif %}
@@ -92,11 +96,11 @@ div{
             <div>もっともリツイート・いいねされたツイート</div>
             {% for index, row in sorted_df.iterrows %}
             <div class="white-container">
-                <div>{{row.created_at.}}</div>
+                <div>{{row.created_at}}</div>
                 <div id="tweet-text">{{row.text}}</div>
                 <div>
-                    <span><i class="far fa-heart"></i>  {{row.fav.}}</span> <span><i class="fas fa-retweet"></i>  {{row.retweets}}</span>
-                    <a class="pull-right">ツイートを見る</a>
+                    <span><i class="far fa-heart"></i>  {{row.fav}}</span> <span><i class="fas fa-retweet"></i> {{row.retweets}}</span>
+                    <a class="pull-right" href="{{ row.url }}">ツイートを見る</a>
                 </div>
             </div>
             {% endfor %}

@@ -23,6 +23,7 @@ urlpatterns = [
 
 ]
 
+# debug_toolbar用
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
