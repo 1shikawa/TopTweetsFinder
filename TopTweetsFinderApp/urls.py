@@ -6,6 +6,6 @@ app_name = 'TopTweetsFinder'
 
 urlpatterns = [
     path(
-        'index/', views.TwitterFinderIndex.as_view(), name='TwitterFinderIndex'
+        '/', views.TwitterFinderIndex.as_view(), name='TwitterFinderIndex'
     ),
     ]
