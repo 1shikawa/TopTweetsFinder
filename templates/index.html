@@ -91,6 +91,7 @@ div{
                 {% endif %}
             </div>
         </div>
+       <!-- 一覧 -->
         <div class="col-md-8">
             {% if profile %}
             <div>もっともリツイート・いいねされたツイート</div>
@@ -110,9 +111,9 @@ div{
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-    <script>
- {% if profile %}
-  // bar chart data
+ <script>
+  {% if profile %}
+   // bar chart data
   var barData = {
   labels : [{% for index, row in sorted_df_created_at.iterrows %}
                  "{{row.created_at}}",
@@ -149,7 +150,7 @@ div{
              ticks: {
                beginAtZero: true,
                min: 0,
-               max: 20
+               max: {{ sorted_df_MaxFav }} + 10
              }
            }
          ]
