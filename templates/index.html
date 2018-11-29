@@ -35,6 +35,7 @@ div{
 }
 
 
+
     </style>
 </head>
 
@@ -53,8 +54,9 @@ div{
                                class="form-control">
                     </div>
                 </div>
-                {% csrf_token %}
                 <button type="submit" class="btn btn-primary">取得する</button>
+                <a>{{ notfound }}</a>
+                {% csrf_token %}
             </form>
         </div>
     </div>
@@ -92,7 +94,7 @@ div{
                 {% endif %}
             </div>
         </div>
-       <!-- 一覧 -->
+        <!-- 一覧 -->
         <div class="col-md-8">
             {% if profile %}
             <div>もっともリツイート・いいねされたツイート</div>
@@ -112,7 +114,7 @@ div{
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
- <script>
+    <script>
   {% if profile %}
    // bar chart data
   var barData = {
@@ -159,6 +161,7 @@ div{
      }
  });
   {% endif %}
-</script>
+
+    </script>
 </body>
 </html>
