@@ -42,52 +42,48 @@ class TwitterFinderIndex(generic.TemplateView):
         # columns定義したDataFrameを作成
         tweets_df = pd.DataFrame(columns=columns)  # 1
         # Tweepy,Statusオブジェクトから各値取得
-        if user_id:
-            for tweet in tweepy.Cursor(api.user_timeline, screen_name=user_id, exclude_replies=True).items():  # 2
-                try:
-                    if not "RT @" in tweet.text:  # 3
-                        se = pd.Series([  # 4
-                            tweet.id,
-                            tweet.created_at,
-                            tweet.text.replace('\n', ''),
-                            tweet.favorite_count,
-                            tweet.retweet_count
-                            # ,tweet.url
-                        ]
-                            , columns
-                        )
-                    tweets_df = tweets_df.append(se, ignore_index=True)  # 5
-                except Exception as e:
-                    print(e)
-            # created_atを日付型に変換
-            tweets_df["created_at"] = pd.to_datetime(tweets_df["created_at"])  # 6
-
-            grouped_df = tweets_df.groupby(tweets_df.created_at.dt.date).sum().sort_values(by="created_at", ascending=False)
-            # リツイート＆いいね数が多い順にソート
-            sorted_df = tweets_df.sort_values(['fav', 'retweets'], ascending=False)
-            ## sorted_df = tweets_df.groupby('tweet_id').sum('fav').sort_values(["retweets","fav"], ascending=False)
-            # 最大のfav数取得
-            sorted_df_MaxFav = max(sorted_df['fav'])
-
-        # else:
-
-
-
-        # Userオブジェクトからプロフィール情報取得
-        user = api.get_user(screen_name=user_id)  # 1
-        profile = {  # 2
-            "id": user.id,
-            "user_id": user_id,
-            "user_name": user.name,
-            "followers_count": user.followers_count,
-            "image": user.profile_image_url,
-            "description": user.description  # 自己紹介文の取得
-        }
-        # created_atをキーに昇順ソート
-        sorted_df_created_at = sorted_df.sort_values('created_at', ascending=True)
-
         try:
             if user_id:
+                for tweet in tweepy.Cursor(api.user_timeline, screen_name=user_id, exclude_replies=True).items():  # 2
+                    try:
+                        if not "RT @" in tweet.text:  # 3
+                            se = pd.Series([  # 4
+                                tweet.id,
+                                tweet.created_at,
+                                tweet.text.replace('\n', ''),
+                                tweet.favorite_count,
+                                tweet.retweet_count
+                                # ,tweet.url
+                            ]
+                                , columns
+                            )
+                        tweets_df = tweets_df.append(se, ignore_index=True)  # 5
+                    except Exception as e:
+                        print(e)
+                # created_atを日付型に変換
+                tweets_df["created_at"] = pd.to_datetime(tweets_df["created_at"])  # 6
+
+                grouped_df = tweets_df.groupby(tweets_df.created_at.dt.date).sum().sort_values(by="created_at",
+                                                                                               ascending=False)
+                # リツイート＆いいね数が多い順にソート
+                sorted_df = tweets_df.sort_values(['fav', 'retweets'], ascending=False)
+                ## sorted_df = tweets_df.groupby('tweet_id').sum('fav').sort_values(["retweets","fav"], ascending=False)
+                # 最大のfav数取得
+                sorted_df_MaxFav = max(sorted_df['fav'])
+
+                # Userオブジェクトからプロフィール情報取得
+                user = api.get_user(screen_name=user_id)  # 1
+                profile = {  # 2
+                    "id": user.id,
+                    "user_id": user_id,
+                    "user_name": user.name,
+                    "followers_count": user.followers_count,
+                    "image": user.profile_image_url,
+                    "description": user.description  # 自己紹介文の取得
+                }
+                # created_atをキーに昇順ソート
+                sorted_df_created_at = sorted_df.sort_values('created_at', ascending=True)
+
                 context['user_id'] = user_id
                 context['tweets_df'] = tweets_df
                 context['grouped_df'] = grouped_df
@@ -98,7 +94,10 @@ class TwitterFinderIndex(generic.TemplateView):
                 context['sorted_df_created_at'] = sorted_df_created_at
                 context['profile'] = profile
                 return context
+
+            else:
+                print('ユーザーが存在しません')
+
         except:
-            print('ユーザーが存在しません')
-# else:
-#     return redirect('TopTweetsFinder:TwitterFinderIndex')
+            context['notfound'] = '対象IDが見つかりません！！'
+            return context

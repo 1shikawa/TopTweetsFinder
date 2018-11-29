@@ -23,6 +23,12 @@ urlpatterns = [
 
 ]
 
+#Add URL maps to redirect the base URL to our application
+from django.views.generic import RedirectView
+urlpatterns += [
+    path('', RedirectView.as_view(url='/index/', permanent=True)),
+]
+
 # debug_toolbar用
 if settings.DEBUG:
     import debug_toolbar
