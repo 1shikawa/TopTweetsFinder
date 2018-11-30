@@ -108,3 +108,4 @@ venv.bak/
 /.idea/
 /TopTweetsFinderApp/config.py
 !/TopTweetsFinderApp/twconfig.py
+/TopTweetsFinderApp/twconfig.py
