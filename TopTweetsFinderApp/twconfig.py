@@ -1,4 +1,4 @@
-# https://apps.twitter.com/app/15695393/keys
+# tweepy用　https://apps.twitter.com/app/15695393/keys
 CONFIG = {
 'CONSUMER_KEY':'hvgtijJXhGaj2x8fyPVzjeZVG',
 'CONSUMER_SECRET':'zuMm9DbQRKuMYyLVCmHbUjtV1OknXKWEusgh8kpgksrCchzws4',
