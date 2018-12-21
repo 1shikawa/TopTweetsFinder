@@ -96,7 +96,7 @@ class TwitterFinderIndex(generic.TemplateView):
                 return context
 
             else:
-                print('test')
+                print('no user')
 
         except:
             context['notfound'] = '対象IDが見つかりません！！'
