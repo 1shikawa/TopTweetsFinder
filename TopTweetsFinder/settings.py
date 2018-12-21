@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'cc^9(lfy_tntc6i2-y#!ff%6vkbao*c8w(3%(dmsnyjs3=v!n3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -311,5 +311,15 @@ if DEBUG:
     DEBUG_TOOLBAR_CONFIG = {
         'INTERCEPT_REDIRECTS': False,
     }
+
+
+###########
+# tweepyAPI setting #
+###########
+CONSUMER_KEY = os.environ['CONSUMER_KEY'],
+CONSUMER_SECRET = os.environ['CONSUMER_SECRET'],
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN'],
+ACCESS_TOKEN_SECRET = os.environ['ACCESS_TOKEN_SECRET']
+
 
 django_heroku.settings(locals())
