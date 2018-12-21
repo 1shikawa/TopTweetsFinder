@@ -6,13 +6,13 @@ import pandas as pd
 from django.views import generic
 from django.shortcuts import redirect
 from django.http import Http404
-from . import twconfig
+from django.conf import settings
 
 # 各種Twitterーのキーをセット
-CONSUMER_KEY = twconfig.CONFIG["CONSUMER_KEY"]
-CONSUMER_SECRET = twconfig.CONFIG["CONSUMER_SECRET"]
-ACCESS_TOKEN = twconfig.CONFIG["ACCESS_TOKEN"]
-ACCESS_TOKEN_SECRET = twconfig.CONFIG["ACCESS_TOKEN_SECRET"]
+CONSUMER_KEY = settings.CONSUMER_KEY
+CONSUMER_SECRET = settings.CONSUMER_SECRET
+ACCESS_TOKEN = settings.ACCESS_TOKEN
+ACCESS_TOKEN_SECRET = settings.ACCESS_TOKEN_SECRET
 
 # Tweepy
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
