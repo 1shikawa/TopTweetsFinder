@@ -13,6 +13,9 @@ DBサーバ：MySQL 5.7 <br>
 IDE：Pycharm 2018.2.2(Community Edition),AWS Cloud9 <br>
 その他：VirtualBox,Vagrant,Docker <br>
 
+# デプロイ環境
+Heroku
+
 # 画面イメージ
 ![1](https://user-images.githubusercontent.com/40058717/48604347-ea5eb980-e9bc-11e8-981c-d379a5767031.png)
 ![2](https://user-images.githubusercontent.com/40058717/48604349-eb8fe680-e9bc-11e8-84ef-2f466a9eb797.png)
